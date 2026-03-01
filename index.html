@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hipertensi — HIMA KESMAS UNSIL</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════════ */
+:root {
+  --red:       #C0392B;
+  --red-light: #E74C3C;
+  --red-pale:  #FDECEA;
+  --navy:      #2C3354;
+  --navy-dark: #1E2440;
+  --navy-mid:  #3A4268;
+  --dark:      #1A0A0A;
+  --cream:     #FDF6F0;
+  --accent:    #F39C12;
+  --green:     #27AE60;
+  --blue:      #2980B9;
+  --orange:    #E67E22;
+  --gray:      #7F8C8D;
+  --lgray:     #F4F6F8;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--dark); overflow-x:hidden; }
+
+/* ═══════════════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════════════ */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  background: var(--navy-dark);
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  transition: background 0.3s;
+}
+.navbar.scrolled {
+  background: rgba(30, 36, 64, 0.97);
+  backdrop-filter: blur(10px);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--red), var(--accent));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(192,57,43,0.4);
+  flex-shrink: 0;
+}
+.nav-logo-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.3px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  list-style: none;
+}
+.nav-links a {
+  display: block;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+.nav-links a.active { color: white; font-weight: 700; background: rgba(192,57,43,0.25); }
+
+/* Hamburger (mobile) */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: auto;
+  flex-direction: column;
+  gap: 5px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: white; border-radius: 2px;
+  transition: all 0.3s;
+}
+.nav-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+gin 
+@media (max-width: 700px) {
+  .nav-toggle { display:flex; }
+  .nav-links {
+    position: fixed;
+    top: 60px; left:0; right:0;
+    background: var(--navy-dark);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px 20px;
+    gap: 4px;
+    transform: translateY(-110%);
+    opacity: 0;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .nav-links.open { transform: translateY(0); opacity:1; }
+  .nav-links a { padding: 10px 16px; font-size: 15px; }
+}
+
+/* Spacer so content starts below fixed nav */
+.nav-spacer { height: 60px; }
+
+/* ═══════════════════════════════════════════════
+   SECTION COMMON
+═══════════════════════════════════════════════ */
+section { scroll-margin-top: 60px; }
+.section-label {
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 700; margin-bottom: 8px; display: block;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 5vw, 38px);
+  font-weight: 900; line-height: 1.2;
+}
+.section-subtitle {
+  font-size: 15px; color: #666; line-height: 1.7; margin-top: 10px;
+  max-width: 560px;
+}
+.center { text-align: center; }
+.center .section-subtitle { margin: 10px auto 0; }
+
+/* ═══════════════════════════════════════════════
+   SECTION 1 — HOME (HERO)
+═══════════════════════════════════════════════ */
+#home {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, #2B1030 50%, #5C1010 100%);
+  color: white;
+  min-height: 90vh; /* dikurangi */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+#home::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(192,57,43,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 20% 80%, rgba(44,51,84,0.4) 0%, transparent 60%);
+  pointer-events: none;
+}
+/* Floating circles decoration */
+#home::after {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 50%;
+  top: -100px; right: -150px;
+  pointer-events: none;
+}
+.hero-inner { 
+    position: relative; 
+    z-index: 1; 
+    max-width: 900px; 
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(192,57,43,0.35);
+  border: 1px solid rgba(255,100,80,0.3);
+  color: #FFD7D7; font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  padding: 7px 18px; border-radius: 24px; margin-bottom: 24px;
+}
+.hero-badge::before { content:'●'; font-size:8px; color:#FF6B6B; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 12vw, 80px);
+  font-weight: 900; line-height: 1.05; margin-bottom: 20px;
+}
+.hero-title .accent { color: var(--accent); }
+.hero-title .light { color: rgba(255,255,255,0.5); font-style: italic; font-size: 0.65em; }
+.hero-desc {
+  font-size: 16px; opacity: 0.75; max-width: 440px;
+  margin: 0 auto 40px; line-height: 1.75;
+}
+
+/* BP Cards */
+.bp-cards { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+    max-width: 520px; 
+    margin: 0 auto 36px; 
+}
+
+.bp-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px; padding: 16px 14px; text-align: left;
+}
+.bp-card-label { font-size: 10px; opacity: 0.55; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.bp-card-value { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; line-height: 1; }
+.bp-card-unit { font-size: 11px; opacity: 0.5; margin-top: 4px; }
+.bp-card .bar { height: 4px; border-radius: 2px; margin-top: 10px; background: rgba(255,255,255,0.1); overflow: hidden; }
+.bp-card .bar-fill { height: 100%; border-radius: 2px; width: 0; }
+.bp-card.sys .bar-fill { background: linear-gradient(90deg,#F39C12,#E74C3C); animation: w85 1.6s .3s ease forwards; }
+.bp-card.dia .bar-fill { background: linear-gradient(90deg,#27AE60,#F39C12); animation: w60 1.6s .5s ease forwards; }
+@keyframes w85 { to { width:85%; } }
+@keyframes w60 { to { width:60%; } }
+
+.hero-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px; border-radius: 12px;
+  background: var(--red); color: white;
+  font-size: 14px; font-weight: 700;
+  text-decoration: none; transition: all 0.2s;
+  border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: var(--red-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,57,43,0.4); }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px; border-radius: 12px;
+  background: rgba(255,255,255,0.08); color: white;
+  border: 1px solid rgba(255,255,255,0.15);
+  font-size: 14px; font-weight: 600;
+  text-decoration: none; transition: all 0.2s; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+/* ═══════════════════════════════════════════════
+   SECTION 2 — TUJUAN
+═══════════════════════════════════════════════ */
+#tujuan {
+  padding: 80px 24px;
+  background: white;
+}
+.tujuan-inner { max-width: 900px; margin: 0 auto; }
+.tujuan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+@media (max-width: 600px) { .tujuan-grid { grid-template-columns: 1fr; } }
+.tujuan-card {
+  border-radius: 20px; padding: 28px;
+  position: relative; overflow: hidden;
+  animation: fadeUp 0.5s ease both;
+}
+.tujuan-card.navy { background: var(--navy-dark); color: white; }
+.tujuan-card.red  { background: var(--red); color: white; }
+.tujuan-card.pale { background: var(--lgray); color: var(--dark); }
+.tujuan-card.cream2 { background: #FFF9F0; color: var(--dark); border: 1px solid #F0E6D6; }
+.tujuan-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 60px; font-weight: 900; opacity: 0.1;
+  position: absolute; top: 10px; right: 20px; line-height: 1;
+}
+.tujuan-icon { font-size: 32px; margin-bottom: 14px; }
+.tujuan-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.tujuan-card p  { font-size: 13px; opacity: 0.75; line-height: 1.65; }
+
+/* ═══════════════════════════════════════════════
+   SECTION 3 — MATERI
+═══════════════════════════════════════════════ */
+#materi { padding: 80px 24px; background: var(--cream); }
+.materi-inner { max-width: 900px; margin: 0 auto; }
+
+/* Tabs */
+.tab-nav {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin: 32px 0 28px; border-bottom: 2px solid #EEE;
+  padding-bottom: 0;
+}
+.tab-btn {
+  padding: 10px 18px; border-radius: 10px 10px 0 0;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  border: none; background: transparent; color: #999;
+  font-family: 'DM Sans', sans-serif;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px; transition: all 0.2s;
+}
+.tab-btn:hover { color: var(--dark); }
+.tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+/* Definition block */
+.def-block {
+  background: white; border-radius: 20px; padding: 28px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 16px;
+}
+.def-block p { font-size: 14px; line-height: 1.8; color: #444; }
+.def-block strong { color: var(--dark); }
+
+/* Classif table */
+.classif-row {
+  display: flex; align-items: center; border-radius: 12px;
+  padding: 14px 18px; margin-bottom: 8px; gap: 14px;
+}
+.classif-dot { width:12px; height:12px; border-radius:50%; flex-shrink:0; }
+.classif-name { font-weight:600; font-size:14px; flex:1; }
+.classif-range { font-size:13px; font-weight:600; }
+.cl1{background:#E8F8F0;} .cl1 .classif-dot{background:#27AE60;} .cl1 .classif-range{color:#27AE60;}
+.cl2{background:#FEF9E7;} .cl2 .classif-dot{background:#F1C40F;} .cl2 .classif-range{color:#D4AC0D;}
+.cl3{background:#FEF3E2;} .cl3 .classif-dot{background:#E67E22;} .cl3 .classif-range{color:#E67E22;}
+.cl4{background:#FDECEA;} .cl4 .classif-dot{background:#E74C3C;} .cl4 .classif-range{color:#E74C3C;}
+.cl5{background:#F9EBEA;} .cl5 .classif-dot{background:#C0392B;} .cl5 .classif-range{color:#C0392B;}
+
+/* Symptom grid */
+.sympt-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+@media(max-width:500px){ .sympt-grid{grid-template-columns:1fr 1fr;} }
+.sympt-card {
+  background:white; border-radius:16px; padding:20px 14px; text-align:center;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+}
+.sympt-card .ico { font-size:28px; margin-bottom:8px; }
+.sympt-card h4 { font-size:13px; font-weight:700; margin-bottom:4px; }
+.sympt-card p  { font-size:11px; color:#888; line-height:1.4; }
+
+/* Risk items */
+.risk-list { background:white; border-radius:20px; padding:4px 20px; box-shadow:0 4px 20px rgba(0,0,0,0.06); }
+.risk-item { display:flex; gap:14px; padding:16px 0; border-bottom:1px solid #F5F0F0; align-items:flex-start; }
+.risk-item:last-child { border-bottom:none; }
+.risk-ico { width:42px;height:42px;border-radius:12px;background:var(--red-pale);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0; }
+.risk-item h4 { font-size:14px; font-weight:700; margin-bottom:3px; }
+.risk-item p  { font-size:12px; color:#777; line-height:1.5; }
+
+/* Komplikasi */
+.kompli-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.kompli-card { border-radius:16px; padding:20px; text-align:center; }
+.kompli-card .ko-ico { font-size:32px; margin-bottom:10px; }
+.kompli-card h4 { font-size:14px; font-weight:700; margin-bottom:4px; }
+.kompli-card p  { font-size:11px; line-height:1.4; }
+
+/* ═══════════════════════════════════════════════
+   SECTION 4 — DOKUMEN / PDF BUTTONS
+═══════════════════════════════════════════════ */
+#dokumen { padding: 80px 24px; background: white; }
+.dokumen-inner { max-width: 700px; margin: 0 auto; }
+
+.doc-card {
+  background: var(--lgray); border-radius: 20px; padding: 22px;
+  margin-bottom: 14px; position: relative; overflow: hidden;
+  border-left: 4px solid transparent; transition: transform 0.2s, box-shadow 0.2s;
+}
+.doc-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+.doc-card.green  { border-left-color: #27AE60; }
+.doc-card.blue   { border-left-color: #2980B9; }
+.doc-card.orange { border-left-color: #E67E22; }
+.doc-card.dark-c { background: linear-gradient(135deg,var(--navy-dark),#3A1030); border-left-color: var(--red); }
+
+.doc-top { display:flex; align-items:flex-start; gap:14px; margin-bottom:16px; }
+.doc-ico { width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0; }
+.doc-ico.g { background:#E8F8F0; }
+.doc-ico.b { background:#EAF4FD; }
+.doc-ico.o { background:#FEF3E2; }
+.doc-ico.d { background:rgba(255,255,255,0.1); }
+.doc-info h3 { font-size:16px; font-weight:700; margin-bottom:4px; }
+.doc-info p  { font-size:12px; line-height:1.5; }
+.doc-card.dark-c .doc-info h3 { color:white; }
+.doc-card.dark-c .doc-info p  { color:rgba(255,255,255,0.6); }
+.doc-actions { display:flex; gap:10px; align-items:center; }
+
+.btn-doc {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+  padding:12px 16px; border-radius:12px; font-size:13px; font-weight:600;
+  text-decoration:none; cursor:pointer; border:none; transition:all 0.2s;
+  font-family:'DM Sans',sans-serif;
+}
+.btn-doc.dk  { background:var(--navy-dark); color:white; }
+.btn-doc.dk:hover { background:var(--navy-mid); }
+.btn-doc.lt  { background:rgba(255,255,255,0.12); color:white; }
+.btn-doc.lt:hover { background:rgba(255,255,255,0.2); }
+
+.btn-qr {
+  width:44px;height:44px;border-radius:12px;border:1.5px solid rgba(0,0,0,0.1);
+  background:white;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;transition:all 0.2s;
+}
+.btn-qr:hover { background:#f0f0f0; }
+.btn-qr.lt { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.15); }
+.btn-qr.lt:hover { background:rgba(255,255,255,0.18); }
+.qr-svg { width:22px; height:22px; }
+
+/* ═══════════════════════════════════════════════
+   SECTION 5 — VIDEO
+═══════════════════════════════════════════════ */
+#video { padding: 80px 24px; background: var(--navy-dark); color: white; }
+.video-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+.video-inner .section-label { color: rgba(255,200,180,0.7); }
+.video-inner .section-title { color: white; }
+.video-inner .section-subtitle { color: rgba(255,255,255,0.6); margin: 10px auto 36px; }
+.video-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media(max-width:560px){ .video-grid{grid-template-columns:1fr;} }
+.video-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px; overflow: hidden;
+  text-align: left; text-decoration: none; color: white;
+  transition: all 0.25s; display: block;
+}
+.video-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+.video-thumb {
+  aspect-ratio: 16/9; background: linear-gradient(135deg,#3A1020,#5C1010);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.video-thumb::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(circle at 50% 50%, rgba(192,57,43,0.3) 0%, transparent 70%);
+}
+.play-btn {
+  width: 54px; height: 54px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; position: relative; z-index:1;
+  transition: all 0.2s;
+}
+.video-card:hover .play-btn { background: var(--red); border-color: var(--red); transform: scale(1.1); }
+.video-meta { padding: 16px; }
+.video-meta .tag {
+  display: inline-block; padding: 3px 10px; border-radius: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  background: rgba(192,57,43,0.3); color: #FF9B9B; margin-bottom: 8px;
+}
+.video-meta h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.video-meta p  { font-size: 11px; opacity: 0.55; }
+
+/* ═══════════════════════════════════════════════
+   SECTION 6 — EVALUASI
+═══════════════════════════════════════════════ */
+#evaluasi { padding: 80px 24px; background: var(--cream); }
+.evaluasi-inner { max-width: 700px; margin: 0 auto; }
+.quiz-wrap {
+  background: white; border-radius: 24px; padding: 28px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08); margin-top: 36px;
+}
+.quiz-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.quiz-header h3 { font-size: 16px; font-weight: 700; }
+.quiz-progress {
+  display: flex; gap: 4px;
+}
+.qp-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #E0E0E0; transition: background 0.3s;
+}
+.qp-dot.done { background: var(--green); }
+.qp-dot.active { background: var(--red); }
+
+.quiz-q { font-size: 16px; font-weight: 600; margin-bottom: 20px; line-height: 1.5; }
+.quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+.quiz-opt {
+  padding: 13px 18px; border-radius: 12px;
+  border: 1.5px solid #E8E8E8; background: white;
+  font-size: 14px; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; text-align: left; transition: all 0.2s; font-weight: 500;
+}
+.quiz-opt:hover { border-color: var(--red); background: var(--red-pale); }
+.quiz-opt.correct { border-color: var(--green); background: #E8F8F0; color: #1E8449; }
+.quiz-opt.wrong   { border-color: var(--red);   background: var(--red-pale); color: var(--red); }
+.quiz-opt:disabled { cursor: default; }
+.quiz-feedback {
+  padding: 12px 16px; border-radius: 12px; font-size: 13px; font-weight: 500;
+  margin-bottom: 16px; display: none; line-height: 1.5;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok  { background: #E8F8F0; color: #1E8449; }
+.quiz-feedback.err { background: var(--red-pale); color: var(--red); }
+.quiz-nav { display: flex; gap: 10px; }
+#quiz-next {
+  flex: 1; padding: 12px; border-radius: 12px;
+  background: var(--navy-dark); color: white;
+  border: none; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  display: none; transition: background 0.2s;
+}
+#quiz-next:hover { background: var(--navy-mid); }
+.quiz-result {
+  text-align: center; display: none; padding: 20px 0;
+}
+.quiz-result .score-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 64px; font-weight: 900;
+  color: var(--red); line-height: 1;
+}
+.quiz-result p { font-size: 15px; color: #666; margin: 8px 0 20px; }
+#quiz-restart {
+  padding: 13px 28px; border-radius: 12px; background: var(--red); color: white;
+  border: none; font-size: 14px; font-weight: 700;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION 7 — KONTAK
+═══════════════════════════════════════════════ */
+#kontak { padding: 80px 24px; background: white; }
+.kontak-inner { max-width: 800px; margin: 0 auto; }
+.kontak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+@media(max-width:600px){ .kontak-grid{grid-template-columns:1fr;} }
+.kontak-info {
+  background: var(--navy-dark); color: white;
+  border-radius: 24px; padding: 32px;
+}
+.kontak-info h3 { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+.k-item { display:flex; align-items:flex-start; gap:14px; margin-bottom:18px; }
+.k-ico { width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0; }
+.k-text h4 { font-size:13px; font-weight:700; margin-bottom:3px; }
+.k-text p  { font-size:12px; color:rgba(255,255,255,0.6); line-height:1.5; }
+
+.kontak-form { background: var(--lgray); border-radius: 24px; padding: 32px; }
+.kontak-form h3 { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+.form-group { margin-bottom: 14px; }
+.form-group label { display:block; font-size:12px; font-weight:600; margin-bottom:6px; color:#555; text-transform:uppercase; letter-spacing:1px; }
+.form-group input,
+.form-group textarea {
+  width:100%; padding:12px 14px; border-radius:10px;
+  border:1.5px solid #E0E0E0; background:white;
+  font-size:14px; font-family:'DM Sans',sans-serif; color:var(--dark);
+  transition:border-color 0.2s; resize:vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus { outline:none; border-color:var(--red); }
+.form-group textarea { min-height:90px; }
+.btn-submit {
+  width:100%; padding:13px; border-radius:12px;
+  background:var(--red); color:white; border:none;
+  font-size:14px; font-weight:700; cursor:pointer;
+  font-family:'DM Sans',sans-serif; transition:all 0.2s;
+}
+.btn-submit:hover { background:var(--red-light); transform:translateY(-2px); }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  background: var(--navy-dark); color: rgba(255,255,255,0.5);
+  padding: 28px 24px; text-align: center; font-size: 12px; line-height: 1.8;
+}
+footer strong { color: white; }
+footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12px auto; border-radius:2px; }
+
+/* ═══════════════════════════════════════════════
+   QR MODAL
+═══════════════════════════════════════════════ */
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999;
+  display:flex; align-items:center; justify-content:center; padding:24px;
+  opacity:0; pointer-events:none; transition:opacity 0.3s;
+}
+.modal-overlay.active { opacity:1; pointer-events:all; }
+.modal {
+  background:white; border-radius:28px; padding:30px 26px;
+  max-width:320px; width:100%; text-align:center;
+  transform:scale(0.88) translateY(16px); transition:transform 0.35s;
+  box-shadow:0 24px 64px rgba(0,0,0,0.35);
+}
+.modal-overlay.active .modal { transform:scale(1) translateY(0); }
+.modal-badge { display:inline-block; padding:5px 14px; border-radius:20px; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:14px; }
+.modal h3 { font-family:'Playfair Display',serif; font-size:20px; margin-bottom:6px; }
+.modal p  { font-size:13px; color:#888; margin-bottom:20px; line-height:1.5; }
+.qr-wrapper { width:200px;height:200px;margin:0 auto 16px;border-radius:16px;overflow:hidden;border:3px solid var(--dark);background:white; }
+.modal-url { background:#F4F6F8; border-radius:10px; padding:10px 14px; font-size:11px; color:#555; word-break:break-all; margin-bottom:18px; font-family:monospace; }
+.modal-close { width:100%; padding:13px; background:var(--navy-dark); color:white; border:none; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; transition:background 0.2s; }
+.modal-close:hover { background:var(--navy-mid); }
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:none; }
+}
+.reveal { opacity:0; transform:translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:none; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">❤️</div>
+    <span class="nav-logo-text">Hipertensi</span>
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home"     class="active" data-section="home">Home</a></li>
+    <li><a href="#tujuan"   data-section="tujuan">Tujuan</a></li>
+    <li><a href="#materi"   data-section="materi">Materi</a></li>
+    <li><a href="#dokumen"  data-section="dokumen">Dokumen</a></li>
+    <li><a href="#video"    data-section="video">Video</a></li>
+    <li><a href="#evaluasi" data-section="evaluasi">Evaluasi</a></li>
+    <li><a href="#kontak"   data-section="kontak">Kontak</a></li>
+  </ul>
+</nav>
+<div class="nav-spacer"></div>
+
+<!-- ════════════════════════════════════════════
+     SECTION 1 — HOME
+════════════════════════════════════════════ -->
+<section id="home">
+  <div class="hero-inner">
+    <div class="hero-badge">Infografis Kesehatan Masyarakat</div>
+    <h1 class="hero-title">
+      Kenali<br>
+      <span class="accent">Hipertensi</span><br>
+      <span class="light">Lebih Dekat</span>
+    </h1>
+    <p class="hero-desc">Penyakit tekanan darah tinggi yang sering tak disadari namun bisa berakibat fatal — <em>silent killer</em> yang perlu kita pahami bersama.</p>
+
+    <div class="bp-cards">
+      <div class="bp-card sys">
+        <div class="bp-card-label">Sistolik</div>
+        <div class="bp-card-value" style="color:#F39C12">≥140</div>
+        <div class="bp-card-unit">mmHg</div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+      <div class="bp-card dia">
+        <div class="bp-card-label">Diastolik</div>
+        <div class="bp-card-value" style="color:#27AE60">≥90</div>
+        <div class="bp-card-unit">mmHg</div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="hero-cta-row">
+      <a href="#materi" class="btn-primary">📚 Pelajari Materi</a>
+      <a href="#evaluasi" class="btn-ghost">📝 Mulai Evaluasi</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 2 — TUJUAN
+════════════════════════════════════════════ -->
+<section id="tujuan">
+  <div class="tujuan-inner">
+    <div class="reveal">
+      <span class="section-label" style="color:var(--red)">Mengapa Penting?</span>
+      <h2 class="section-title">Tujuan Edukasi Ini</h2>
+      <p class="section-subtitle">Halaman ini dirancang sebagai media edukasi interaktif untuk meningkatkan kesadaran masyarakat tentang hipertensi.</p>
+    </div>
+    <div class="tujuan-grid">
+      <div class="tujuan-card navy reveal" style="transition-delay:0.1s">
+        <div class="tujuan-num">01</div>
+        <div class="tujuan-icon">🎯</div>
+        <h3>Meningkatkan Kesadaran</h3>
+        <p>Membantu masyarakat mengenali hipertensi sebagai masalah kesehatan serius yang memerlukan perhatian sejak dini.</p>
+      </div>
+      <div class="tujuan-card red reveal" style="transition-delay:0.15s">
+        <div class="tujuan-num">02</div>
+        <div class="tujuan-icon">📖</div>
+        <h3>Memberikan Pengetahuan</h3>
+        <p>Menyajikan informasi ilmiah tentang penyebab, gejala, klasifikasi, komplikasi, serta cara pencegahan hipertensi.</p>
+      </div>
+      <div class="tujuan-card pale reveal" style="transition-delay:0.20s">
+        <div class="tujuan-num">03</div>
+        <div class="tujuan-icon">💡</div>
+        <h3>Mendorong Perubahan Perilaku</h3>
+        <p>Memotivasi masyarakat untuk mengadopsi gaya hidup sehat guna mencegah dan mengendalikan tekanan darah tinggi.</p>
+      </div>
+      <div class="tujuan-card cream2 reveal" style="transition-delay:0.25s">
+        <div class="tujuan-num">04</div>
+        <div class="tujuan-icon">🤝</div>
+        <h3>Mendukung Program Kesehatan</h3>
+        <p>Bersinergi dengan program Kementerian Kesehatan RI dalam menurunkan prevalensi hipertensi di Indonesia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 3 — MATERI
+════════════════════════════════════════════ -->
+<section id="materi">
+  <div class="materi-inner">
+    <div class="reveal">
+      <span class="section-label" style="color:var(--red)">Edukasi Lengkap</span>
+      <h2 class="section-title">Materi Hipertensi</h2>
+      <p class="section-subtitle">Pilih topik di bawah untuk mempelajari lebih lanjut tentang hipertensi.</p>
+    </div>
+
+    <div class="tab-nav" role="tablist">
+      <button class="tab-btn active" onclick="switchTab('definisi')">📌 Definisi</button>
+      <button class="tab-btn" onclick="switchTab('klasifikasi')">📊 Klasifikasi</button>
+      <button class="tab-btn" onclick="switchTab('gejala')">🤒 Gejala</button>
+      <button class="tab-btn" onclick="switchTab('faktor')">⚠️ Faktor Risiko</button>
+      <button class="tab-btn" onclick="switchTab('komplikasi')">🚨 Komplikasi</button>
+    </div>
+
+    <!-- Definisi -->
+    <div id="tab-definisi" class="tab-pane active">
+      <div class="def-block">
+        <p>
+          <strong>Hipertensi</strong> atau tekanan darah tinggi adalah kondisi medis kronis di mana tekanan darah pada dinding arteri meningkat secara persisten melebihi nilai normal, yaitu <strong>sistolik ≥ 140 mmHg dan/atau diastolik ≥ 90 mmHg</strong> (WHO, JNC-8).
+        </p>
+        <br>
+        <p>
+          Kondisi ini disebut <strong>"silent killer"</strong> karena sering tidak menimbulkan gejala yang jelas hingga terjadi komplikasi serius seperti stroke, serangan jantung, atau gagal ginjal. Di Indonesia, <strong>sekitar 34%</strong> penduduk dewasa menderita hipertensi, namun hanya sekitar 44% yang menyadarinya.
+        </p>
+        <br>
+        <p>
+          Hipertensi dibagi menjadi dua jenis utama: <strong>Hipertensi Primer (Esensial)</strong> yang tidak diketahui penyebab pastinya dan merupakan 90–95% dari semua kasus, serta <strong>Hipertensi Sekunder</strong> yang disebabkan oleh kondisi medis tertentu seperti penyakit ginjal atau kelainan hormonal.
+        </p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:4px;">
+        <div class="sympt-card" style="background:var(--red-pale)">
+          <div class="ico">📌</div>
+          <h4 style="color:var(--red)">Tekanan Normal</h4>
+          <p>&lt; 120/80 mmHg adalah target yang sehat</p>
+        </div>
+        <div class="sympt-card" style="background:#FEF3E2">
+          <div class="ico">⚠️</div>
+          <h4 style="color:var(--orange)">Pra-Hipertensi</h4>
+          <p>120–139/80–89 mmHg perlu waspada</p>
+        </div>
+        <div class="sympt-card" style="background:#E8F8F0">
+          <div class="ico">✅</div>
+          <h4 style="color:var(--green)">Dapat Dicegah</h4>
+          <p>80% kasus bisa dicegah dengan gaya hidup sehat</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Klasifikasi -->
+    <div id="tab-klasifikasi" class="tab-pane">
+      <div class="def-block" style="padding-bottom:8px">
+        <div class="classif-row cl1"><div class="classif-dot"></div><div class="classif-name">Normal</div><div class="classif-range">&lt; 120 / 80 mmHg</div></div>
+        <div class="classif-row cl2"><div class="classif-dot"></div><div class="classif-name">Pra-Hipertensi</div><div class="classif-range">120–139 / 80–89 mmHg</div></div>
+        <div class="classif-row cl3"><div class="classif-dot"></div><div class="classif-name">Hipertensi Tingkat 1</div><div class="classif-range">140–159 / 90–99 mmHg</div></div>
+        <div class="classif-row cl4"><div class="classif-dot"></div><div class="classif-name">Hipertensi Tingkat 2</div><div class="classif-range">160–179 / 100–109 mmHg</div></div>
+        <div class="classif-row cl5"><div class="classif-dot"></div><div class="classif-name">Krisis Hipertensi</div><div class="classif-range">≥ 180 / ≥ 110 mmHg</div></div>
+      </div>
+      <div class="def-block" style="background:var(--red-pale);border:1px solid #F5C6C0">
+        <p style="color:var(--red)"><strong>⚠️ Krisis Hipertensi</strong> memerlukan penanganan medis darurat segera. Segera ke IGD jika tekanan darah ≥ 180/120 mmHg disertai gejala seperti nyeri dada, sesak napas, atau pusing berat.</p>
+      </div>
+    </div>
+
+    <!-- Gejala -->
+    <div id="tab-gejala" class="tab-pane">
+      <div class="def-block">
+        <p>Hipertensi sering tidak bergejala. Namun pada tekanan darah yang sangat tinggi atau sudah berlangsung lama, beberapa gejala berikut mungkin muncul:</p>
+      </div>
+      <div class="sympt-grid">
+        <div class="sympt-card"><div class="ico">🤕</div><h4>Sakit Kepala</h4><p>Terutama di belakang kepala, saat bangun pagi</p></div>
+        <div class="sympt-card"><div class="ico">😵</div><h4>Pusing/Vertigo</h4><p>Rasa berputar atau kehilangan keseimbangan</p></div>
+        <div class="sympt-card"><div class="ico">👁️</div><h4>Gangguan Penglihatan</h4><p>Pandangan kabur atau melihat bintik</p></div>
+        <div class="sympt-card"><div class="ico">💓</div><h4>Jantung Berdebar</h4><p>Detak cepat atau tidak teratur</p></div>
+        <div class="sympt-card"><div class="ico">🩸</div><h4>Mimisan</h4><p>Pendarahan dari hidung yang tiba-tiba</p></div>
+        <div class="sympt-card"><div class="ico">😮‍💨</div><h4>Sesak Napas</h4><p>Terutama saat beraktivitas fisik</p></div>
+      </div>
+    </div>
+
+    <!-- Faktor Risiko -->
+    <div id="tab-faktor" class="tab-pane">
+      <div class="risk-list">
+        <div class="risk-item"><div class="risk-ico">🧬</div><div><h4>Keturunan / Genetik</h4><p>Jika kedua orang tua hipertensi, risiko anak mencapai 50–60%</p></div></div>
+        <div class="risk-item"><div class="risk-ico">🍔</div><div><h4>Pola Makan Tidak Sehat</h4><p>Konsumsi garam berlebih (>5g/hari), lemak jenuh tinggi, kurang sayur</p></div></div>
+        <div class="risk-item"><div class="risk-ico">🛋️</div><div><h4>Kurang Aktivitas Fisik</h4><p>Gaya hidup sedentari melemahkan jantung dan meningkatkan tekanan darah</p></div></div>
+        <div class="risk-item"><div class="risk-ico">🚬</div><div><h4>Merokok & Alkohol</h4><p>Nikotin menyebabkan penyempitan pembuluh darah langsung</p></div></div>
+        <div class="risk-item"><div class="risk-ico">😰</div><div><h4>Stres Berkepanjangan</h4><p>Kortisol kronis memicu peningkatan tekanan darah menetap</p></div></div>
+        <div class="risk-item"><div class="risk-ico">⚖️</div><div><h4>Obesitas (BMI ≥ 25)</h4><p>Setiap kenaikan 1 kg berat badan menaikkan TD sistolik ~1 mmHg</p></div></div>
+        <div class="risk-item"><div class="risk-ico">👴</div><div><h4>Usia ≥ 40 Tahun</h4><p>Risiko meningkat seiring pengerasan dinding arteri alami</p></div></div>
+      </div>
+    </div>
+
+    <!-- Komplikasi -->
+    <div id="tab-komplikasi" class="tab-pane">
+      <div class="def-block">
+        <p>Hipertensi yang tidak terkontrol dalam jangka panjang dapat menyebabkan kerusakan berbagai organ penting:</p>
+      </div>
+      <div class="kompli-grid">
+        <div class="kompli-card" style="background:var(--red-pale)">
+          <div class="ko-ico">🧠</div>
+          <h4 style="color:var(--red)">Stroke</h4>
+          <p style="color:#777">Penyebab utama stroke hemoragik. 54% kasus stroke disebabkan hipertensi tidak terkontrol.</p>
+        </div>
+        <div class="kompli-card" style="background:#FEF3E2">
+          <div class="ko-ico">🫀</div>
+          <h4 style="color:var(--orange)">Serangan Jantung</h4>
+          <p style="color:#777">Penyakit jantung koroner akibat penebalan dan pengerasan dinding arteri koronaria.</p>
+        </div>
+        <div class="kompli-card" style="background:#EAF4FD">
+          <div class="ko-ico">🫘</div>
+          <h4 style="color:var(--blue)">Gagal Ginjal</h4>
+          <p style="color:#777">Penyebab ke-2 gagal ginjal kronis di Indonesia setelah diabetes mellitus.</p>
+        </div>
+        <div class="kompli-card" style="background:#E8F8F0">
+          <div class="ko-ico">👁️</div>
+          <h4 style="color:var(--green)">Kebutaan</h4>
+          <p style="color:#777">Retinopati hipertensif — kerusakan pembuluh darah di retina mata.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 4 — DOKUMEN PDF
+════════════════════════════════════════════ -->
+<section id="dokumen">
+  <div class="dokumen-inner">
+    <div class="reveal center">
+      <span class="section-label" style="color:var(--red)">📄 Unduh Materi</span>
+      <h2 class="section-title">Panduan Lengkap</h2>
+      <p class="section-subtitle">Buka PDF atau pindai QR Code untuk mengakses materi lewat perangkat lain.</p>
+    </div>
+
+    <div style="margin-top:36px">
+      <!-- PENCEGAHAN -->
+      <div class="doc-card green reveal" style="transition-delay:0.05s">
+        <div class="doc-top">
+          <div class="doc-ico g">🛡️</div>
+          <div class="doc-info">
+            <h3>Cara Pencegahan Hipertensi</h3>
+            <p>7 langkah efektif, panduan DASH diet, dan tips hidup sehat harian.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <a href="pencegahan-hipertensi.pdf" target="_blank" class="btn-doc dk">📥 Buka PDF</a>
+          <button class="btn-qr" onclick="showQR('pencegahan')" title="QR Code">
+            <svg class="qr-svg" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="3" width="4" height="4" fill="#333"/><rect x="13" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="15" y="3" width="4" height="4" fill="#333"/><rect x="1" y="13" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="15" width="4" height="4" fill="#333"/><rect x="13" y="13" width="2" height="2" fill="#333"/><rect x="17" y="13" width="2" height="2" fill="#333"/><rect x="13" y="17" width="2" height="2" fill="#333"/><rect x="17" y="17" width="2" height="2" fill="#333"/><rect x="15" y="15" width="2" height="2" fill="#333"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- PENANGGULANGAN -->
+      <div class="doc-card blue reveal" style="transition-delay:0.12s">
+        <div class="doc-top">
+          <div class="doc-ico b">💊</div>
+          <div class="doc-info">
+            <h3>Cara Penanggulangan Hipertensi</h3>
+            <p>Tata laksana non-farmakologis & farmakologis, jenis obat, tanda darurat.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <a href="penanggulangan-hipertensi.pdf" target="_blank" class="btn-doc dk">📥 Buka PDF</a>
+          <button class="btn-qr" onclick="showQR('penanggulangan')" title="QR Code">
+            <svg class="qr-svg" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="3" width="4" height="4" fill="#333"/><rect x="13" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="15" y="3" width="4" height="4" fill="#333"/><rect x="1" y="13" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="15" width="4" height="4" fill="#333"/><rect x="13" y="13" width="2" height="2" fill="#333"/><rect x="17" y="13" width="2" height="2" fill="#333"/><rect x="13" y="17" width="2" height="2" fill="#333"/><rect x="17" y="17" width="2" height="2" fill="#333"/><rect x="15" y="15" width="2" height="2" fill="#333"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- FAKTA -->
+      <div class="doc-card orange reveal" style="transition-delay:0.19s">
+        <div class="doc-top">
+          <div class="doc-ico o">📊</div>
+          <div class="doc-info">
+            <h3>Fakta & Statistik Hipertensi</h3>
+            <p>Data global & Indonesia, 10 fakta menarik berbasis riset dan WHO 2023.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <a href="fakta-hipertensi.pdf" target="_blank" class="btn-doc dk">📥 Buka PDF</a>
+          <button class="btn-qr" onclick="showQR('fakta')" title="QR Code">
+            <svg class="qr-svg" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="3" width="4" height="4" fill="#333"/><rect x="13" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="15" y="3" width="4" height="4" fill="#333"/><rect x="1" y="13" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="15" width="4" height="4" fill="#333"/><rect x="13" y="13" width="2" height="2" fill="#333"/><rect x="17" y="13" width="2" height="2" fill="#333"/><rect x="13" y="17" width="2" height="2" fill="#333"/><rect x="17" y="17" width="2" height="2" fill="#333"/><rect x="15" y="15" width="2" height="2" fill="#333"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- SEMUA -->
+      <div class="doc-card dark-c reveal" style="transition-delay:0.26s">
+        <div class="doc-top">
+          <div class="doc-ico d">🗂️</div>
+          <div class="doc-info">
+            <h3>Semua Materi HIMA KESMAS</h3>
+            <p>Repositori lengkap materi edukasi kesehatan masyarakat UNSIL.</p>
+          </div>
+        </div>
+        <div class="doc-actions">
+          <a href="#" class="btn-doc lt">🌐 Kunjungi Halaman</a>
+          <button class="btn-qr lt" onclick="showQR('main')" title="QR Code">
+            <svg class="qr-svg" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" rx="1" stroke="white" stroke-width="1.8"/><rect x="3" y="3" width="4" height="4" fill="white"/><rect x="13" y="1" width="8" height="8" rx="1" stroke="white" stroke-width="1.8"/><rect x="15" y="3" width="4" height="4" fill="white"/><rect x="1" y="13" width="8" height="8" rx="1" stroke="white" stroke-width="1.8"/><rect x="3" y="15" width="4" height="4" fill="white"/><rect x="13" y="13" width="2" height="2" fill="white"/><rect x="17" y="13" width="2" height="2" fill="white"/><rect x="13" y="17" width="2" height="2" fill="white"/><rect x="17" y="17" width="2" height="2" fill="white"/><rect x="15" y="15" width="2" height="2" fill="white"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 5 — VIDEO
+════════════════════════════════════════════ -->
+<section id="video">
+  <div class="video-inner">
+    <div class="reveal">
+      <span class="section-label" style="color:rgba(255,180,160,0.7)">Media Pembelajaran</span>
+      <h2 class="section-title" style="color:white">Video Edukasi</h2>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.6);margin:10px auto 36px">Tonton video berikut untuk memahami hipertensi secara lebih mendalam dan mudah dipahami.</p>
+    </div>
+    <div class="video-grid reveal">
+      <a href="https://youtu.be/placeholder1" target="_blank" class="video-card">
+        <div class="video-thumb">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-meta">
+          <span class="tag">Pengenalan</span>
+          <h4>Apa Itu Hipertensi?</h4>
+          <p>Penjelasan dasar tentang hipertensi dan dampaknya</p>
+        </div>
+      </a>
+      <a href="https://youtu.be/placeholder2" target="_blank" class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(135deg,#0A2040,#0D3060)">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-meta">
+          <span class="tag">Pencegahan</span>
+          <h4>Cara Mencegah Hipertensi</h4>
+          <p>Langkah praktis menjaga tekanan darah tetap normal</p>
+        </div>
+      </a>
+      <a href="https://youtu.be/placeholder3" target="_blank" class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(135deg,#0A2A10,#0D4020)">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-meta">
+          <span class="tag">Pengobatan</span>
+          <h4>Penanganan Hipertensi</h4>
+          <p>Panduan terapi farmakologis dan non-farmakologis</p>
+        </div>
+      </a>
+      <a href="https://youtu.be/placeholder4" target="_blank" class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(135deg,#2A1A00,#4A2A00)">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-meta">
+          <span class="tag">Diet</span>
+          <h4>DASH Diet untuk Hipertensi</h4>
+          <p>Panduan pola makan efektif menurunkan tekanan darah</p>
+        </div>
+      </a>
+    </div>
+    <p style="font-size:12px;opacity:0.4;margin-top:20px;text-align:center">* Ganti URL video dengan link YouTube yang sesuai</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 6 — EVALUASI
+════════════════════════════════════════════ -->
+<section id="evaluasi">
+  <div class="evaluasi-inner">
+    <div class="reveal center">
+      <span class="section-label" style="color:var(--red)">Uji Pemahaman</span>
+      <h2 class="section-title">Evaluasi</h2>
+      <p class="section-subtitle center">Jawab pertanyaan berikut untuk menguji seberapa baik kamu memahami materi hipertensi.</p>
+    </div>
+
+    <div class="quiz-wrap reveal" style="transition-delay:0.15s">
+      <div class="quiz-header">
+        <h3 id="quiz-label">Pertanyaan 1 dari 5</h3>
+        <div class="quiz-progress" id="quiz-progress">
+          <div class="qp-dot active"></div>
+          <div class="qp-dot"></div>
+          <div class="qp-dot"></div>
+          <div class="qp-dot"></div>
+          <div class="qp-dot"></div>
+        </div>
+      </div>
+
+      <div id="quiz-body">
+        <p class="quiz-q" id="quiz-q"></p>
+        <div class="quiz-options" id="quiz-opts"></div>
+        <div class="quiz-feedback" id="quiz-fb"></div>
+        <button id="quiz-next" onclick="nextQ()">Pertanyaan Berikutnya →</button>
+      </div>
+
+      <div class="quiz-result" id="quiz-result">
+        <div class="score-num" id="quiz-score"></div>
+        <p id="quiz-msg"></p>
+        <button id="quiz-restart" onclick="initQuiz()">🔄 Ulangi Kuis</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     SECTION 7 — KONTAK
+════════════════════════════════════════════ -->
+<section id="kontak">
+  <div class="kontak-inner">
+    <div class="reveal">
+      <span class="section-label" style="color:var(--red)">Hubungi Kami</span>
+      <h2 class="section-title">Kontak</h2>
+      <p class="section-subtitle">Ada pertanyaan atau ingin berkolaborasi? Hubungi kami melalui informasi berikut.</p>
+    </div>
+    <div class="kontak-grid">
+      <div class="kontak-info reveal" style="transition-delay:0.1s">
+        <h3>Departemen Keilmuan</h3>
+        <div class="k-item">
+          <div class="k-ico">🏛️</div>
+          <div class="k-text">
+            <h4>Organisasi</h4>
+            <p>Himpunan Mahasiswa Kesehatan Masyarakat (HIMA KESMAS) — Universitas Siliwangi (UNSIL), Tasikmalaya</p>
+          </div>
+        </div>
+        <div class="k-item">
+          <div class="k-ico">📧</div>
+          <div class="k-text">
+            <h4>Email</h4>
+            <p>keilmuan@himakesmas.unsil.ac.id</p>
+          </div>
+        </div>
+        <div class="k-item">
+          <div class="k-ico">📍</div>
+          <div class="k-text">
+            <h4>Alamat</h4>
+            <p>Jl. Siliwangi No. 24, Tasikmalaya, Jawa Barat 46115</p>
+          </div>
+        </div>
+        <div class="k-item">
+          <div class="k-ico">📱</div>
+          <div class="k-text">
+            <h4>Instagram</h4>
+            <p>@himakesmas.unsil</p>
+          </div>
+        </div>
+      </div>
+      <div class="kontak-form reveal" style="transition-delay:0.2s">
+        <h3>Kirim Pesan</h3>
+        <div class="form-group">
+          <label>Nama Lengkap</label>
+          <input type="text" placeholder="Masukkan nama Anda">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@contoh.com">
+        </div>
+        <div class="form-group">
+          <label>Pesan</label>
+          <textarea placeholder="Tulis pesan atau pertanyaan Anda..."></textarea>
+        </div>
+        <button class="btn-submit" onclick="handleSubmit()">✉️ Kirim Pesan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>HIMA KESMAS UNSIL — Departemen Keilmuan</strong>
+  <div class="foot-divider"></div>
+  Infografis ini disusun untuk tujuan edukasi kesehatan masyarakat.<br>
+  Selalu konsultasikan kondisi kesehatan Anda kepada tenaga medis profesional.<br>
+  <span style="opacity:0.4;font-size:11px">Sumber: WHO 2023, Kemenkes RI, JNC-8 Guidelines</span>
+</footer>
+
+<!-- QR MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeBg(event)">
+  <div class="modal">
+    <span class="modal-badge" id="modalBadge"></span>
+    <h3 id="modalTitle"></h3>
+    <p id="modalDesc"></p>
+    <div class="qr-wrapper">
+      <canvas id="qrCanvas" width="200" height="200"></canvas>
+    </div>
+    <div class="modal-url" id="modalUrl"></div>
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">✕ Tutup</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+/* ─── NAVBAR ──────────────────────────────────── */
+const navbar   = document.getElementById('navbar');
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+  updateActiveNav();
+});
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => { navToggle.classList.remove('open'); navLinks.classList.remove('open'); });
+});
+
+function updateActiveNav() {
+  const sections = ['home','tujuan','materi','dokumen','video','evaluasi','kontak'];
+  let current = 'home';
+  for (const id of sections) {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 80) current = id;
+  }
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.classList.toggle('active', a.dataset.section === current);
+  });
+}
+
+/* ─── SCROLL REVEAL ──────────────────────────── */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ─── TABS ───────────────────────────────────── */
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    const names = ['definisi','klasifikasi','gejala','faktor','komplikasi'];
+    b.classList.toggle('active', names[i] === id);
+  });
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+}
+
+/* ─── QUIZ ───────────────────────────────────── */
+const QUESTIONS = [
+  {
+    q: 'Berapakah batas tekanan darah yang dinyatakan sebagai hipertensi menurut JNC-8?',
+    opts: ['≥ 120/80 mmHg', '≥ 130/85 mmHg', '≥ 140/90 mmHg', '≥ 160/100 mmHg'],
+    ans: 2,
+    exp: '✅ Benar! Menurut JNC-8 dan WHO, hipertensi didefinisikan sebagai tekanan darah ≥ 140/90 mmHg.'
+  },
+  {
+    q: 'Mengapa hipertensi disebut "silent killer"?',
+    opts: [
+      'Karena hanya menyerang orang tua',
+      'Karena sering tidak menimbulkan gejala hingga komplikasi serius terjadi',
+      'Karena obatnya sulit ditemukan',
+      'Karena hanya bisa dideteksi dengan MRI'
+    ],
+    ans: 1,
+    exp: '✅ Tepat! Hipertensi disebut silent killer karena sebagian besar penderita tidak merasakan gejala apapun hingga terjadi komplikasi seperti stroke atau serangan jantung.'
+  },
+  {
+    q: 'Berapa persen prevalensi hipertensi pada penduduk Indonesia berusia ≥ 18 tahun?',
+    opts: ['15%', '24%', '34%', '44%'],
+    ans: 2,
+    exp: '✅ Benar! Sekitar 34% penduduk Indonesia dewasa menderita hipertensi berdasarkan data Riskesdas 2018.'
+  },
+  {
+    q: 'Manakah yang BUKAN merupakan cara pencegahan hipertensi?',
+    opts: [
+      'Mengurangi konsumsi garam',
+      'Olahraga rutin 30 menit/hari',
+      'Merokok secara teratur',
+      'Menjaga berat badan ideal'
+    ],
+    ans: 2,
+    exp: '✅ Tepat! Merokok justru meningkatkan risiko hipertensi karena nikotin menyebabkan penyempitan pembuluh darah.'
+  },
+  {
+    q: 'Apa yang harus dilakukan jika tekanan darah ≥ 180/120 mmHg disertai nyeri dada?',
+    opts: [
+      'Istirahat dan tidur saja',
+      'Minum kopi untuk menstabilkan',
+      'Segera ke IGD — ini krisis hipertensi',
+      'Tunggu hingga besok dan periksa ulang'
+    ],
+    ans: 2,
+    exp: '✅ Benar! Tekanan darah ≥ 180/120 mmHg disertai gejala merupakan krisis hipertensi yang memerlukan penanganan medis darurat segera.'
+  }
+];
+
+let qIdx = 0, score = 0, answered = false;
+
+function initQuiz() {
+  qIdx = 0; score = 0; answered = false;
+  document.getElementById('quiz-body').style.display = '';
+  document.getElementById('quiz-result').style.display = 'none';
+  renderQ();
+}
+
+function renderQ() {
+  const q = QUESTIONS[qIdx];
+  document.getElementById('quiz-label').textContent = `Pertanyaan ${qIdx+1} dari ${QUESTIONS.length}`;
+  document.getElementById('quiz-q').textContent = q.q;
+  const opts = document.getElementById('quiz-opts');
+  opts.innerHTML = '';
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = o;
+    btn.onclick = () => selectOpt(i);
+    opts.appendChild(btn);
+  });
+  const fb = document.getElementById('quiz-fb');
+  fb.className = 'quiz-feedback'; fb.textContent = '';
+  document.getElementById('quiz-next').style.display = 'none';
+
+  const dots = document.querySelectorAll('.qp-dot');
+  dots.forEach((d,i) => {
+    d.className = 'qp-dot';
+    if (i < qIdx) d.classList.add('done');
+    else if (i === qIdx) d.classList.add('active');
+  });
+  answered = false;
+}
+
+function selectOpt(i) {
+  if (answered) return;
+  answered = true;
+  const q = QUESTIONS[qIdx];
+  const btns = document.querySelectorAll('.quiz-opt');
+  btns.forEach(b => b.disabled = true);
+  if (i === q.ans) {
+    btns[i].classList.add('correct'); score++;
+    const fb = document.getElementById('quiz-fb');
+    fb.textContent = q.exp; fb.className = 'quiz-feedback show ok';
+  } else {
+    btns[i].classList.add('wrong');
+    btns[q.ans].classList.add('correct');
+    const fb = document.getElementById('quiz-fb');
+    fb.textContent = '❌ Kurang tepat. ' + q.exp; fb.className = 'quiz-feedback show err';
+  }
+  document.getElementById('quiz-next').style.display = '';
+  document.getElementById('quiz-next').textContent =
+    qIdx < QUESTIONS.length - 1 ? 'Pertanyaan Berikutnya →' : 'Lihat Hasil 🎉';
+}
+
+function nextQ() {
+  qIdx++;
+  if (qIdx < QUESTIONS.length) {
+    renderQ();
+  } else {
+    document.getElementById('quiz-body').style.display = 'none';
+    const res = document.getElementById('quiz-result');
+    res.style.display = 'block';
+    const pct = Math.round(score / QUESTIONS.length * 100);
+    document.getElementById('quiz-score').textContent = pct + '%';
+    let msg = '';
+    if (pct === 100) msg = '🎉 Sempurna! Kamu menguasai materi hipertensi dengan sangat baik.';
+    else if (pct >= 80) msg = '👏 Bagus sekali! Pemahamanmu tentang hipertensi sudah sangat baik.';
+    else if (pct >= 60) msg = '👍 Cukup baik! Pelajari kembali bagian yang belum dipahami.';
+    else msg = '📚 Perlu belajar lebih lagi. Coba baca materi di atas dan ulangi kuis ini.';
+    document.getElementById('quiz-msg').textContent = msg;
+  }
+}
+
+initQuiz();
+
+/* ─── KONTAK FORM ────────────────────────────── */
+function handleSubmit() {
+  const btn = event.target;
+  btn.textContent = '✅ Pesan Terkirim!';
+  btn.style.background = '#27AE60';
+  setTimeout(() => { btn.textContent = '✉️ Kirim Pesan'; btn.style.background = ''; }, 3000);
+}
+
+/* ─── QR CODE GENERATOR ──────────────────────── */
+const QRGen = (() => {
+  const EXP = new Uint8Array(512), LOG = new Uint8Array(256);
+  (() => { let x=1; for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x<<=1;if(x&256)x^=0x11d;} for(let i=255;i<512;i++)EXP[i]=EXP[i-255]; })();
+  const mul=(a,b)=>a&&b?EXP[LOG[a]+LOG[b]]:0;
+  const polyMul=(p,q)=>{const r=new Uint8Array(p.length+q.length-1);for(let i=0;i<p.length;i++)for(let j=0;j<q.length;j++)r[i+j]^=mul(p[i],q[j]);return r;};
+  const genPoly=n=>{let p=[1];for(let i=0;i<n;i++)p=polyMul(p,[1,EXP[i]]);return p;};
+  const rsEncode=(data,n)=>{const gen=genPoly(n),out=new Uint8Array(data.length+n);out.set(data);for(let i=0;i<data.length;i++){const c=out[i];if(c)for(let j=0;j<gen.length;j++)out[i+j]^=mul(gen[j],c);}return out.slice(data.length);};
+  const SZ=29,DC=26,EC=22;
+  function enc(text){
+    const bytes=[...new TextEncoder().encode(text.slice(0,DC-3))];
+    let bits='0100'+bytes.length.toString(2).padStart(8,'0');
+    for(const b of bytes)bits+=b.toString(2).padStart(8,'0');
+    bits+='0000'; while(bits.length%8)bits+='0';
+    const cw=[];for(let i=0;i<bits.length;i+=8)cw.push(parseInt(bits.slice(i,i+8),2));
+    const pad=[0xEC,0x11]; while(cw.length<DC)cw.push(pad[(cw.length-Math.ceil(bits.length/8))%2]);
+    return[...cw,...rsEncode(new Uint8Array(cw),EC)];
+  }
+  function build(cw){
+    const M=Array.from({length:SZ},()=>new Int8Array(SZ).fill(-1));
+    const F=Array.from({length:SZ},()=>new Uint8Array(SZ));
+    const mark=(r,c)=>{if(r>=0&&r<SZ&&c>=0&&c<SZ)F[r][c]=1;};
+    const set=(r,c,v)=>{if(r>=0&&r<SZ&&c>=0&&c<SZ){M[r][c]=v;mark(r,c);}};
+    const finder=(tr,tc)=>{for(let dr=-1;dr<=7;dr++)for(let dc=-1;dc<=7;dc++){const r=tr+dr,c=tc+dc;if(r<0||r>=SZ||c<0||c>=SZ)continue;const ins=dr>=0&&dr<=6&&dc>=0&&dc<=6;set(r,c,ins?(dr===0||dr===6||dc===0||dc===6||(dr>=2&&dr<=4&&dc>=2&&dc<=4))?1:0:0);}};
+    finder(0,0);finder(0,SZ-7);finder(SZ-7,0);
+    for(let i=8;i<SZ-8;i++){set(6,i,i%2===0?1:0);set(i,6,i%2===0?1:0);}
+    for(let dr=-2;dr<=2;dr++)for(let dc=-2;dc<=2;dc++)set(22+dr,22+dc,dr===0&&dc===0?1:(Math.abs(dr)===2||Math.abs(dc)===2)?1:0);
+    set(8,SZ-8,1);
+    for(let i=0;i<=8;i++){mark(8,i);mark(i,8);}for(let i=SZ-7;i<SZ;i++){mark(8,i);mark(i,8);}
+    let bi=0; const all=cw.map(c=>c.toString(2).padStart(8,'0')).join('')+'000'; let up=true;
+    for(let col=SZ-1;col>=0;col-=2){if(col===6)col--;for(let ri=0;ri<SZ;ri++){const row=up?SZ-1-ri:ri;for(const c of[col,col-1])if(c>=0&&!F[row][c]&&bi<all.length)M[row][c]=+all[bi++];}up=!up;}
+    for(let r=0;r<SZ;r++)for(let c=0;c<SZ;c++)if(!F[r][c]&&M[r][c]>=0&&(r+c)%2===0)M[r][c]^=1;
+    const fi='101010000010010';const fp=[[8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[8,7],[8,8],[7,8],[5,8],[4,8],[3,8],[2,8],[1,8],[0,8]];
+    for(let i=0;i<15;i++){const[r,c]=fp[i];M[r][c]=+fi[i];}
+    for(let i=0;i<7;i++)M[SZ-1-i][8]=+fi[i];for(let i=7;i<15;i++)M[8][SZ-15+i]=+fi[i];M[8][SZ-8]=1;
+    return M;
+  }
+  function render(canvas,text){
+    const M=build(enc(text));const ctx=canvas.getContext('2d');const QZ=2,total=SZ+QZ*2,cs=canvas.width/total;
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#000';
+    for(let r=0;r<SZ;r++)for(let c=0;c<SZ;c++)if(M[r][c]===1)ctx.fillRect((c+QZ)*cs,(r+QZ)*cs,cs,cs);
+  }
+  return{render};
+})();
+
+const QDOCS = {
+  pencegahan:    { title:'Cara Pencegahan Hipertensi', badge:'🛡️ Pencegahan', bc:'#E8F8F0', bt:'#27AE60', desc:'Pindai QR ini untuk membuka panduan lengkap pencegahan hipertensi.', url:'https://himakesmas.unsil.ac.id/hipertensi/pencegahan' },
+  penanggulangan:{ title:'Cara Penanggulangan Hipertensi', badge:'💊 Penanggulangan', bc:'#EAF4FD', bt:'#2980B9', desc:'Pindai QR ini untuk mengakses panduan tata laksana hipertensi.', url:'https://himakesmas.unsil.ac.id/hipertensi/penanggulangan' },
+  fakta:         { title:'Fakta & Statistik Hipertensi', badge:'📊 Fakta', bc:'#FEF3E2', bt:'#E67E22', desc:'Pindai QR ini untuk membaca data & fakta lengkap seputar hipertensi.', url:'https://himakesmas.unsil.ac.id/hipertensi/fakta' },
+  main:          { title:'Repositori HIMA KESMAS', badge:'🗂️ Semua Materi', bc:'#F5EEF8', bt:'#8E44AD', desc:'Akses repositori materi edukasi kesehatan masyarakat UNSIL.', url:'https://himakesmas.unsil.ac.id/hipertensi' }
+};
+
+function showQR(key) {
+  const d = QDOCS[key];
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalDesc').textContent  = d.desc;
+  document.getElementById('modalUrl').textContent   = d.url;
+  const badge = document.getElementById('modalBadge');
+  badge.textContent = d.badge; badge.style.background = d.bc; badge.style.color = d.bt;
+  QRGen.render(document.getElementById('qrCanvas'), d.url);
+  document.getElementById('modal').classList.add('active');
+}
+function closeBg(e) { if(e.target.id==='modal') document.getElementById('modal').classList.remove('active'); }
+</script>
+</body>
+</html>
