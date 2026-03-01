@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hipertensi — HIMA KESMAS UNSIL</title>
+<title>Pengembangan Multimedia - Kesehatan Masyarakat UNSIL</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
@@ -56,15 +56,25 @@ body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--da
   text-decoration: none;
   flex-shrink: 0;
 }
+
 .nav-logo-icon {
-  width: 36px; height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--red), var(--accent));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  box-shadow: 0 2px 8px rgba(192,57,43,0.4);
-  flex-shrink: 0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
 }
+
+.unsil-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .nav-logo-text {
   font-size: 16px;
   font-weight: 600;
@@ -616,7 +626,11 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
 ════════════════════════════════════════════ -->
 <nav class="navbar" id="navbar">
   <a href="#home" class="nav-logo">
-    <div class="nav-logo-icon">❤️</div>
+    <div class="nav-logo-icon">
+      <img src="https://unsil.ac.id/wp-content/uploads/2021/07/cropped-LOGO-UNSIL.png" 
+          alt="Logo UNSIL"
+          class="unsil-logo">
+    </div>
     <span class="nav-logo-text">Hipertensi</span>
   </a>
   <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -902,8 +916,8 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
         <div class="doc-top">
           <div class="doc-ico d">🗂️</div>
           <div class="doc-info">
-            <h3>Semua Materi HIMA KESMAS</h3>
-            <p>Repositori lengkap materi edukasi kesehatan masyarakat UNSIL.</p>
+            <h3>Semua Materi</h3>
+            <p>Repositori materi edukasi kesehatan masyarakat UNSIL.</p>
           </div>
         </div>
         <div class="doc-actions">
@@ -1024,19 +1038,19 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
     </div>
     <div class="kontak-grid">
       <div class="kontak-info reveal" style="transition-delay:0.1s">
-        <h3>Departemen Keilmuan</h3>
+        <h3>Pengembangan Multimedia</h3>
         <div class="k-item">
           <div class="k-ico">🏛️</div>
           <div class="k-text">
-            <h4>Organisasi</h4>
-            <p>Himpunan Mahasiswa Kesehatan Masyarakat (HIMA KESMAS) — Universitas Siliwangi (UNSIL), Tasikmalaya</p>
+            <h4>Universitas Siliwangi</h4>
+            <p>Program Studi Kesehatan Masyarakat Fakultas Ilmu Kesehatan — Universitas Siliwangi, Tasikmalaya</p>
           </div>
         </div>
         <div class="k-item">
           <div class="k-ico">📧</div>
           <div class="k-text">
             <h4>Email</h4>
-            <p>keilmuan@himakesmas.unsil.ac.id</p>
+            <p>email@email.com</p>
           </div>
         </div>
         <div class="k-item">
@@ -1050,7 +1064,7 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
           <div class="k-ico">📱</div>
           <div class="k-text">
             <h4>Instagram</h4>
-            <p>@himakesmas.unsil</p>
+            <p>@universitassiliwangi</p>
           </div>
         </div>
       </div>
@@ -1076,11 +1090,14 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
 
 <!-- FOOTER -->
 <footer>
-  <strong>HIMA KESMAS UNSIL — Departemen Keilmuan</strong>
+  <strong>Pengembangan Multimedia — Kesehatan Masyarakat</strong>
   <div class="foot-divider"></div>
-  Infografis ini disusun untuk tujuan edukasi kesehatan masyarakat.<br>
-  Selalu konsultasikan kondisi kesehatan Anda kepada tenaga medis profesional.<br>
-  <span style="opacity:0.4;font-size:11px">Sumber: WHO 2023, Kemenkes RI, JNC-8 Guidelines</span>
+  Mata Kuliah Pengembangan Multimedia.<br>
+  Program Studi Kesehatan Masyarakat — Fakultas Ilmu Kesehatan<br>
+  Universitas Siliwangi.<br>
+  <span style="opacity:0.4;font-size:11px">
+  Sumber: WHO 2023, Kemenkes RI, JNC-8 Guidelines
+  </span>
 </footer>
 
 <!-- QR MODAL -->
@@ -1326,10 +1343,10 @@ const QRGen = (() => {
 })();
 
 const QDOCS = {
-  pencegahan:    { title:'Cara Pencegahan Hipertensi', badge:'🛡️ Pencegahan', bc:'#E8F8F0', bt:'#27AE60', desc:'Pindai QR ini untuk membuka panduan lengkap pencegahan hipertensi.', url:'https://himakesmas.unsil.ac.id/hipertensi/pencegahan' },
-  penanggulangan:{ title:'Cara Penanggulangan Hipertensi', badge:'💊 Penanggulangan', bc:'#EAF4FD', bt:'#2980B9', desc:'Pindai QR ini untuk mengakses panduan tata laksana hipertensi.', url:'https://himakesmas.unsil.ac.id/hipertensi/penanggulangan' },
-  fakta:         { title:'Fakta & Statistik Hipertensi', badge:'📊 Fakta', bc:'#FEF3E2', bt:'#E67E22', desc:'Pindai QR ini untuk membaca data & fakta lengkap seputar hipertensi.', url:'https://himakesmas.unsil.ac.id/hipertensi/fakta' },
-  main:          { title:'Repositori HIMA KESMAS', badge:'🗂️ Semua Materi', bc:'#F5EEF8', bt:'#8E44AD', desc:'Akses repositori materi edukasi kesehatan masyarakat UNSIL.', url:'https://himakesmas.unsil.ac.id/hipertensi' }
+  pencegahan:    { title:'Cara Pencegahan Hipertensi', badge:'🛡️ Pencegahan', bc:'#E8F8F0', bt:'#27AE60', desc:'Pindai QR ini untuk membuka panduan lengkap pencegahan hipertensi.', url:'' },
+  penanggulangan:{ title:'Cara Penanggulangan Hipertensi', badge:'💊 Penanggulangan', bc:'#EAF4FD', bt:'#2980B9', desc:'Pindai QR ini untuk mengakses panduan tata laksana hipertensi.', url:'' },
+  fakta:         { title:'Fakta & Statistik Hipertensi', badge:'📊 Fakta', bc:'#FEF3E2', bt:'#E67E22', desc:'Pindai QR ini untuk membaca data & fakta lengkap seputar hipertensi.', url:'' },
+  main:          { title:'Repositori HIMA KESMAS', badge:'🗂️ Semua Materi', bc:'#F5EEF8', bt:'#8E44AD', desc:'Akses repositori materi edukasi kesehatan masyarakat UNSIL.', url:'' }
 };
 
 function showQR(key) {
