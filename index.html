@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pengembangan Multimedia - Kesehatan Masyarakat UNSIL</title>
+<title>Pengembangan media - Kesehatan Masyarakat UNSIL</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════
@@ -449,6 +449,15 @@ section { scroll-margin-top: 60px; }
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden;
 }
+
+.video-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  position:absolute;
+  inset:0;
+}
+
 .video-thumb::before {
   content:''; position:absolute; inset:0;
   background: radial-gradient(circle at 50% 50%, rgba(192,57,43,0.3) 0%, transparent 70%);
@@ -869,7 +878,7 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
           </div>
         </div>
         <div class="doc-actions">
-          <a href="pencegahan-hipertensi.pdf" target="_blank" class="btn-doc dk">📥 Buka PDF</a>
+          <a href="materi/CARA-PENCEGAHAN-HIPERTENSI.pdf.pdf" target="_blank" class="btn-doc dk">📥 Buka PDF</a>
           <button class="btn-qr" onclick="showQR('pencegahan')" title="QR Code">
             <svg class="qr-svg" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="3" width="4" height="4" fill="#333"/><rect x="13" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="15" y="3" width="4" height="4" fill="#333"/><rect x="1" y="13" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="15" width="4" height="4" fill="#333"/><rect x="13" y="13" width="2" height="2" fill="#333"/><rect x="17" y="13" width="2" height="2" fill="#333"/><rect x="13" y="17" width="2" height="2" fill="#333"/><rect x="17" y="17" width="2" height="2" fill="#333"/><rect x="15" y="15" width="2" height="2" fill="#333"/></svg>
           </button>
@@ -886,7 +895,7 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
           </div>
         </div>
         <div class="doc-actions">
-          <a href="penanggulangan-hipertensi.pdf" target="_blank" class="btn-doc dk">📥 Buka PDF</a>
+          <a href="materi/CARA-PENANGGULANGAN-HIPERTENSI.pdf" target="_blank" class="btn-doc dk">📥 Buka PDF</a>
           <button class="btn-qr" onclick="showQR('penanggulangan')" title="QR Code">
             <svg class="qr-svg" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="3" width="4" height="4" fill="#333"/><rect x="13" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="15" y="3" width="4" height="4" fill="#333"/><rect x="1" y="13" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="15" width="4" height="4" fill="#333"/><rect x="13" y="13" width="2" height="2" fill="#333"/><rect x="17" y="13" width="2" height="2" fill="#333"/><rect x="13" y="17" width="2" height="2" fill="#333"/><rect x="17" y="17" width="2" height="2" fill="#333"/><rect x="15" y="15" width="2" height="2" fill="#333"/></svg>
           </button>
@@ -903,26 +912,9 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
           </div>
         </div>
         <div class="doc-actions">
-          <a href="fakta-hipertensi.pdf" target="_blank" class="btn-doc dk">📥 Buka PDF</a>
+          <a href="materi/FAKTA-STATISTIK-HIPERTENSI.pdf" target="_blank" class="btn-doc dk">📥 Buka PDF</a>
           <button class="btn-qr" onclick="showQR('fakta')" title="QR Code">
             <svg class="qr-svg" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="3" width="4" height="4" fill="#333"/><rect x="13" y="1" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="15" y="3" width="4" height="4" fill="#333"/><rect x="1" y="13" width="8" height="8" rx="1" stroke="#333" stroke-width="1.8"/><rect x="3" y="15" width="4" height="4" fill="#333"/><rect x="13" y="13" width="2" height="2" fill="#333"/><rect x="17" y="13" width="2" height="2" fill="#333"/><rect x="13" y="17" width="2" height="2" fill="#333"/><rect x="17" y="17" width="2" height="2" fill="#333"/><rect x="15" y="15" width="2" height="2" fill="#333"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- SEMUA -->
-      <div class="doc-card dark-c reveal" style="transition-delay:0.26s">
-        <div class="doc-top">
-          <div class="doc-ico d">🗂️</div>
-          <div class="doc-info">
-            <h3>Semua Materi</h3>
-            <p>Repositori materi edukasi kesehatan masyarakat UNSIL.</p>
-          </div>
-        </div>
-        <div class="doc-actions">
-          <a href="#" class="btn-doc lt">🌐 Kunjungi Halaman</a>
-          <button class="btn-qr lt" onclick="showQR('main')" title="QR Code">
-            <svg class="qr-svg" viewBox="0 0 22 22" fill="none"><rect x="1" y="1" width="8" height="8" rx="1" stroke="white" stroke-width="1.8"/><rect x="3" y="3" width="4" height="4" fill="white"/><rect x="13" y="1" width="8" height="8" rx="1" stroke="white" stroke-width="1.8"/><rect x="15" y="3" width="4" height="4" fill="white"/><rect x="1" y="13" width="8" height="8" rx="1" stroke="white" stroke-width="1.8"/><rect x="3" y="15" width="4" height="4" fill="white"/><rect x="13" y="13" width="2" height="2" fill="white"/><rect x="17" y="13" width="2" height="2" fill="white"/><rect x="13" y="17" width="2" height="2" fill="white"/><rect x="17" y="17" width="2" height="2" fill="white"/><rect x="15" y="15" width="2" height="2" fill="white"/></svg>
           </button>
         </div>
       </div>
@@ -940,49 +932,62 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
       <h2 class="section-title" style="color:white">Video Edukasi</h2>
       <p class="section-subtitle" style="color:rgba(255,255,255,0.6);margin:10px auto 36px">Tonton video berikut untuk memahami hipertensi secara lebih mendalam dan mudah dipahami.</p>
     </div>
-    <div class="video-grid reveal">
-      <a href="https://youtu.be/placeholder1" target="_blank" class="video-card">
-        <div class="video-thumb">
-          <div class="play-btn">▶</div>
-        </div>
-        <div class="video-meta">
-          <span class="tag">Pengenalan</span>
-          <h4>Apa Itu Hipertensi?</h4>
-          <p>Penjelasan dasar tentang hipertensi dan dampaknya</p>
-        </div>
-      </a>
-      <a href="https://youtu.be/placeholder2" target="_blank" class="video-card">
-        <div class="video-thumb" style="background:linear-gradient(135deg,#0A2040,#0D3060)">
-          <div class="play-btn">▶</div>
-        </div>
-        <div class="video-meta">
-          <span class="tag">Pencegahan</span>
-          <h4>Cara Mencegah Hipertensi</h4>
-          <p>Langkah praktis menjaga tekanan darah tetap normal</p>
-        </div>
-      </a>
-      <a href="https://youtu.be/placeholder3" target="_blank" class="video-card">
-        <div class="video-thumb" style="background:linear-gradient(135deg,#0A2A10,#0D4020)">
-          <div class="play-btn">▶</div>
-        </div>
-        <div class="video-meta">
-          <span class="tag">Pengobatan</span>
-          <h4>Penanganan Hipertensi</h4>
-          <p>Panduan terapi farmakologis dan non-farmakologis</p>
-        </div>
-      </a>
-      <a href="https://youtu.be/placeholder4" target="_blank" class="video-card">
-        <div class="video-thumb" style="background:linear-gradient(135deg,#2A1A00,#4A2A00)">
-          <div class="play-btn">▶</div>
-        </div>
-        <div class="video-meta">
-          <span class="tag">Diet</span>
-          <h4>DASH Diet untuk Hipertensi</h4>
-          <p>Panduan pola makan efektif menurunkan tekanan darah</p>
-        </div>
-      </a>
+<div class="video-grid reveal">
+
+  <!-- VIDEO 1 -->
+  <a href="https://www.youtube.com/watch?v=bRkrRlN1q_c" target="_blank" class="video-card">
+    <div class="video-thumb">
+      <img src="https://img.youtube.com/vi/bRkrRlN1q_c/maxresdefault.jpg" alt="Apa Itu Hipertensi">
+      <div class="play-btn">▶</div>
     </div>
-    <p style="font-size:12px;opacity:0.4;margin-top:20px;text-align:center">* Ganti URL video dengan link YouTube yang sesuai</p>
+    <div class="video-meta">
+      <span class="tag">Pengenalan</span>
+      <h4>Apa Itu Hipertensi?</h4>
+      <p>Mengenal penyakit hipertensi, gejala, dan cara pencegahannya</p>
+    </div>
+  </a>
+
+  <!-- VIDEO 2 -->
+  <a href="https://www.youtube.com/watch?v=BHQps6YwZkE" target="_blank" class="video-card">
+    <div class="video-thumb">
+      <img src="https://img.youtube.com/vi/BHQps6YwZkE/maxresdefault.jpg" alt="Cara Mencegah Hipertensi">
+      <div class="play-btn">▶</div>
+    </div>
+    <div class="video-meta">
+      <span class="tag">Pencegahan</span>
+      <h4>Cara Mencegah Hipertensi</h4>
+      <p>Langkah praktis menjaga tekanan darah tetap normal</p>
+    </div>
+  </a>
+
+  <!-- VIDEO 3 -->
+  <a href="https://www.youtube.com/watch?v=Qz77dXkPoO8" target="_blank" class="video-card">
+    <div class="video-thumb">
+      <img src="https://img.youtube.com/vi/Qz77dXkPoO8/maxresdefault.jpg" alt="Penanganan Hipertensi">
+      <div class="play-btn">▶</div>
+    </div>
+    <div class="video-meta">
+      <span class="tag">Pengobatan</span>
+      <h4>Penanganan Hipertensi</h4>
+      <p>Penjelasan mengenai hipertensi oleh dr. Hasril Hadis, Sp.JP(K), FIHA</p>
+    </div>
+  </a>
+
+  <!-- VIDEO 4 -->
+  <a href="https://www.youtube.com/watch?v=lGynLQ1ADkg" target="_blank" class="video-card">
+    <div class="video-thumb">
+      <img src="https://img.youtube.com/vi/lGynLQ1ADkg/maxresdefault.jpg" alt="Senam Hipertensi">
+      <div class="play-btn">▶</div>
+    </div>
+    <div class="video-meta">
+      <span class="tag">Kebugaran</span>
+      <h4>Senam untuk Hipertensi</h4>
+      <p>Senam hipertensi dari RS dr. Suyoto Pusrehab Kementerian Pertahanan</p>
+    </div>
+  </a>
+
+</div>
+    <p style="font-size:12px;opacity:0.4;margin-top:20px;text-align:center"></p>
   </div>
 </section>
 
@@ -1037,7 +1042,7 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
     </div>
     <div class="kontak-grid">
       <div class="kontak-info reveal" style="transition-delay:0.1s">
-        <h3>Pengembangan Multimedia</h3>
+        <h3>Pengembangan media</h3>
         <div class="k-item">
           <div class="k-ico">🏛️</div>
           <div class="k-text">
@@ -1089,9 +1094,9 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
 
 <!-- FOOTER -->
 <footer>
-  <strong>Pengembangan Multimedia — Kesehatan Masyarakat</strong>
+  <strong>Pengembangan media — Kesehatan Masyarakat</strong>
   <div class="foot-divider"></div>
-  Mata Kuliah Pengembangan Multimedia.<br>
+  Mata Kuliah Pengembangan media.<br>
   Program Studi Kesehatan Masyarakat — Fakultas Ilmu Kesehatan<br>
   Universitas Siliwangi.<br>
   <span style="opacity:0.4;font-size:11px">
