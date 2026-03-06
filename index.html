@@ -1376,15 +1376,49 @@ const QDOCS = {
 };
 
 function showQR(key) {
+
   const d = QDOCS[key];
+
   document.getElementById('modalTitle').textContent = d.title;
   document.getElementById('modalDesc').textContent  = d.desc;
   document.getElementById('modalUrl').textContent   = d.url;
+
   const badge = document.getElementById('modalBadge');
-  badge.textContent = d.badge; badge.style.background = d.bc; badge.style.color = d.bt;
-  QRGen.render(document.getElementById('qrCanvas'), d.url);
+  badge.textContent = d.badge;
+  badge.style.background = d.bc;
+  badge.style.color = d.bt;
+
+  const canvas = document.getElementById("qrCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const qr = new Image();
+  qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(d.url);
+
+  qr.onload = function () {
+
+      ctx.clearRect(0,0,200,200);
+
+      // gambar QR
+      ctx.drawImage(qr,0,0,200,200);
+
+      // gambar background putih untuk logo
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+      ctx.arc(100,100,32,0,Math.PI*2);
+      ctx.fill();
+
+      // gambar logo UNSIL
+      const logo = new Image();
+      logo.src = "/logo/logo-unsil.png";
+
+      logo.onload = function(){
+          ctx.drawImage(logo,72,72,56,56);
+      }
+  }
+
   document.getElementById('modal').classList.add('active');
 }
+
 function closeBg(e) { if(e.target.id==='modal') document.getElementById('modal').classList.remove('active'); }
 </script>
 </body>
