@@ -1114,6 +1114,13 @@ footer .foot-divider { width:40px; height:2px; background:var(--red); margin:12p
       <canvas id="qrCanvas" width="200" height="200"></canvas>
     </div>
     <div class="modal-url" id="modalUrl"></div>
+      <button id="downloadQR" class="modal-close" style="background:#27AE60;margin-bottom:8px">
+      ⬇ Download QR
+      </button>
+
+      <button class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">
+      ✕ Tutup
+      </button>
     <button class="modal-close" onclick="document.getElementById('modal').classList.remove('active')">✕ Tutup</button>
   </div>
 </div>
@@ -1375,13 +1382,13 @@ const QDOCS = {
   }
 };
 
-function showQR(key) {
+function showQR(key){
 
   const d = QDOCS[key];
 
   document.getElementById('modalTitle').textContent = d.title;
-  document.getElementById('modalDesc').textContent  = d.desc;
-  document.getElementById('modalUrl').textContent   = d.url;
+  document.getElementById('modalDesc').textContent = d.desc;
+  document.getElementById('modalUrl').textContent = d.url;
 
   const badge = document.getElementById('modalBadge');
   badge.textContent = d.badge;
@@ -1392,29 +1399,28 @@ function showQR(key) {
   const ctx = canvas.getContext("2d");
 
   const qr = new Image();
-  qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" + encodeURIComponent(d.url);
 
-  qr.onload = function () {
+  // QR resolusi tinggi agar tajam
+  qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=" + encodeURIComponent(d.url);
+
+  qr.onload = function(){
 
       ctx.clearRect(0,0,200,200);
 
-      // gambar QR
+      // gambar QR ke canvas
       ctx.drawImage(qr,0,0,200,200);
 
-      // gambar background putih untuk logo
-      ctx.fillStyle = "white";
-      ctx.beginPath();
-      ctx.arc(100,100,22,0,Math.PI*2);
-      ctx.fill();
+      // tombol download
+      document.getElementById("downloadQR").onclick = function(){
 
-      // gambar logo UNSIL
-      const logo = new Image();
-      logo.src = "/logo/logo-unsil.png";
+          const link = document.createElement("a");
+          link.download = "qr-"+key+".png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
 
-      logo.onload = function(){
-          ctx.drawImage(logo,72,72,56,56);
-      }
-  }
+      };
+
+  };
 
   document.getElementById('modal').classList.add('active');
 }
